@@ -18,6 +18,11 @@ class _LoginViewState extends State<LoginView> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -111,7 +116,7 @@ class _LoginViewState extends State<LoginView> {
                         const SizedBox(height: 16),
                         TextButton(
                           onPressed: () {
-                            // Navegar para tela de recuperação de senha
+                            Navigator.of(context).pushNamed('/forgot-password');
                           },
                           child: const Text('Esqueceu sua senha?'),
                         ),
@@ -122,7 +127,7 @@ class _LoginViewState extends State<LoginView> {
                             const Text('Não tem uma conta?'),
                             TextButton(
                               onPressed: () {
-                                // Navegar para tela de cadastro
+                                Navigator.of(context).pushNamed('/register');
                               },
                               child: const Text('Cadastre-se'),
                             ),

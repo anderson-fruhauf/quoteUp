@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'pages/home/home_view.dart';
 import 'pages/second/second_view.dart';
 import 'pages/login/login_view.dart';
@@ -7,7 +9,9 @@ import 'shared/controllers/loader_controller.dart';
 import 'shared/providers/loader_provider.dart';
 import 'shared/widgets/linear_loader.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
