@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quoteup/services/auth_service.dart';
 import 'firebase_options.dart';
 import 'pages/home/home_view.dart';
 import 'pages/second/second_view.dart';
@@ -10,6 +11,7 @@ import 'pages/register/register_view.dart';
 import 'shared/controllers/loader_controller.dart';
 import 'shared/providers/loader_provider.dart';
 import 'shared/widgets/linear_loader.dart';
+import 'shared/widgets/auth_wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loaderController = LoaderController();
+    final authService = AuthService();
+    final authUser = authService.currentUser;
 
     return LoaderProvider(
       controller: loaderController,
@@ -59,13 +63,13 @@ class MyApp extends StatelessWidget {
                   useMaterial3: true,
                 )
                 : null,
-        initialRoute: '/login',
+        initialRoute: authUser != null ? '/' : '/login',
         routes: {
           '/login': (context) => const LoginView(),
-          '/': (context) => HomeView(),
-          '/segunda': (context) => SecondView(),
-          '/forgot-password': (context) => const ForgotPasswordView(),
           '/register': (context) => const RegisterView(),
+          '/forgot-password': (context) => const ForgotPasswordView(),
+          '/': (context) => AuthWrapper(child: HomeView()),
+          '/segunda': (context) => AuthWrapper(child: SecondView()),
         },
         builder: (context, child) {
           return Column(
