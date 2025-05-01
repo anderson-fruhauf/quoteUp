@@ -5,6 +5,8 @@ import 'firebase_options.dart';
 import 'pages/home/home_view.dart';
 import 'pages/second/second_view.dart';
 import 'pages/login/login_view.dart';
+import 'pages/forgot_password/forgot_password_view.dart';
+import 'pages/register/register_view.dart';
 import 'shared/controllers/loader_controller.dart';
 import 'shared/providers/loader_provider.dart';
 import 'shared/widgets/linear_loader.dart';
@@ -62,6 +64,8 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginView(),
           '/': (context) => HomeView(),
           '/segunda': (context) => SecondView(),
+          '/forgot-password': (context) => const ForgotPasswordView(),
+          '/register': (context) => const RegisterView(),
         },
         builder: (context, child) {
           return Column(
